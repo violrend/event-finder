@@ -33,9 +33,35 @@ const Footer = () => {
     <footer className='container mx-auto px-4 py-8'>
       <Separator className='mb-5' />
 
-      <div className='flex flex-col md:flex-row md:justify-between space-y-2 md:items-end'>
+      <div className='flex flex-col md:flex-row md:justify-between space-y-8 md:space-y-0 md:items-end'>
+        {/* Social Links and Copyright - Bottom on mobile, left on desktop */}
+        <div className='flex flex-col space-y-4'>
+          <div className='flex space-x-4'>
+            <SocialIcon
+              icon={siInstagram}
+              href='https://instagram.com'
+              label='Instagram'
+            />
+            <SocialIcon icon={siX} href='https://twitter.com' label='Twitter' />
+            <SocialIcon
+              icon={siLinkedin}
+              href='https://linkedin.com'
+              label='LinkedIn'
+            />
+            <SocialIcon
+              icon={siGithub}
+              href='https://github.com/yourusername/event-finder-app'
+              label='GitHub'
+            />
+          </div>
+          <p className='text-xs text-gray-600'>
+            © {currentYear} Can Kiziloglu.
+          </p>
+          <Separator className='md:hidden' />
+        </div>
+
         {/* Quick Search Links - Two columns */}
-        <div className='flex flex-col space-y-2 order-2 md:order-2 mt-8 md:mt-0'>
+        <div className='flex flex-col space-y-2 mt-6 md:mt-0'>
           <h4 className='font-semibold mb-2'>Quick Search</h4>
           <div className='grid grid-cols-2 gap-4'>
             {/* Event Types Column */}
@@ -75,34 +101,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Social Links and Copyright - Bottom on mobile, left on desktop */}
-        <div className='flex flex-col space-y-4 order-1 md:order-1'>
-          <div className='flex space-x-4'>
-            <SocialIcon
-              icon={siInstagram}
-              href='https://instagram.com'
-              label='Instagram'
-            />
-            <SocialIcon icon={siX} href='https://twitter.com' label='Twitter' />
-            <SocialIcon
-              icon={siLinkedin}
-              href='https://linkedin.com'
-              label='LinkedIn'
-            />
-            <SocialIcon
-              icon={siGithub}
-              href='https://github.com/yourusername/event-finder-app'
-              label='GitHub'
-            />
-          </div>
-          <p className='text-xs text-gray-600'>
-            © {currentYear} Can Kiziloglu.
-          </p>
-          <Separator className='md:hidden' />
-        </div>
-
         {/* Legal Links - Middle on mobile, right on desktop */}
-        <div className='flex flex-col space-y-2 order-2 md:order-3'>
+        <div className='flex flex-col space-y-2 mt-6 md:mt-0'>
           <Link href='/terms' className='text-sm hover:underline'>
             Terms of Use
           </Link>
