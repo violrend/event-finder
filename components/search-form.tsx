@@ -58,7 +58,7 @@ export function SearchForm() {
         <DatePickerWithRange date={date} setDate={setDate} className='w-full md:w-1/3'/>
       </div>
       <Button type='submit' className='w-full'>
-        <Search className='mr-2 h-4 w-4' /> Search Events
+        <Search className='mr-2 h-4 w-4' /> <h5>Search Events</h5>
       </Button>
     </form>
   );
