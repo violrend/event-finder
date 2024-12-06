@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { AutoComplete } from '@/components/ui/autocomplete';
 import {
   Select,
   SelectContent,
@@ -13,19 +13,22 @@ import {
 import { DatePickerWithRange } from '@/components/date-range-picker';
 import { Search } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
-
-const categories = [
-  { value: 'music', label: 'Music' },
-  { value: 'sports', label: 'Sports' },
-  { value: 'arts', label: 'Arts & Theater' },
-  { value: 'family', label: 'Family' },
-  { value: 'other', label: 'Other' },
-];
+import { getCities } from '@/api/api';
 
 export function SearchForm() {
   const [city, setCity] = useState('');
+  const [searchCityValue, setSearchCityValue] = useState('');
   const [date, setDate] = useState<DateRange | undefined>(undefined);
   const [category, setCategory] = useState('');
+
+  const data = getCities(searchCityValue);
+  const categories = [
+    { value: 'music', label: 'Music' },
+    { value: 'sports', label: 'Sports' },
+    { value: 'arts', label: 'Arts & Theater' },
+    { value: 'film', label: 'Film' },
+    { value: 'other', label: 'Other' },
+  ]
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,12 +39,13 @@ export function SearchForm() {
   return (
     <form onSubmit={handleSubmit} className='w-full max-w-3xl space-y-4'>
       <div className='flex flex-col md:flex-row gap-4'>
-        <Input
-          type='text'
-          placeholder='City'
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          className='w-full md:w-1/3 text-sm md-text-md'
+        <AutoComplete
+          selectedValue={city}
+          onSelectedValueChange={setCity}
+          searchValue={searchCityValue}
+          onSearchValueChange={setSearchCityValue}
+          items={data ?? []}
+          placeholder='Enter City'
         />
         <Select value={category} onValueChange={setCategory}>
           <SelectTrigger className='w-full md:w-1/3 text-sm md-text-md'>
