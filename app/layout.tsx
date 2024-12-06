@@ -2,6 +2,7 @@ import { inter, noto_serif } from './fonts/fonts'
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/header"
 import "./globals.css"
+import Footer from '@/components/footer'
 
 export const metadata = {
   title: "Event Finder App",
@@ -24,6 +25,7 @@ export default function RootLayout({
         >
           <Header />
           <main>{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
