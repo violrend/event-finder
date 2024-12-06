@@ -38,18 +38,20 @@ export function SearchForm() {
 
   return (
     <form onSubmit={handleSubmit} className='w-full max-w-3xl space-y-4'>
-      <div className='flex flex-col md:flex-row gap-4'>
-        <AutoComplete
-          selectedValue={city}
-          onSelectedValueChange={setCity}
-          searchValue={searchCityValue}
-          onSearchValueChange={setSearchCityValue}
-          items={data ?? []}
-          placeholder='Enter City'
-        />
+      <div className='flex flex-col md:flex-row gap-4 justify-between'>
+        <div className='w-full md:w-1/3'>
+          <AutoComplete
+            selectedValue={city}
+            onSelectedValueChange={setCity}
+            searchValue={searchCityValue}
+            onSearchValueChange={setSearchCityValue}
+            items={data ?? []}
+            placeholder='Enter City'
+          />
+        </div>
         <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger className='w-full md:w-1/3 text-sm md-text-md'>
-            <SelectValue placeholder='Category' />
+          <SelectTrigger className='w-full md:w-1/3 text-base'>
+            <SelectValue placeholder='Select Category' />
           </SelectTrigger>
           <SelectContent>
             {categories.map((cat) => (

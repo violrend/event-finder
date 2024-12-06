@@ -30,65 +30,85 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='container'>
-      <Separator className='bg-gray-200 dark:bg-gray-700' />
-      <div className='mx-auto px-4 py-8'>
-        <div className='flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0'>
-          {/* Quick Search Links - Top on mobile, middle on desktop */}
-          <div className='flex flex-col space-y-2 order-1 md:order-2'>
-            <h4 className='font-semibold mb-2'>Quick Search</h4>
-            <Link href='/events/music' className='text-sm hover:underline'>
-              Music Events
-            </Link>
-            <Link href='/events/sports' className='text-sm hover:underline'>
-              Sports Events
-            </Link>
-            <Link href='/events/arts' className='text-sm hover:underline'>
-              Arts & Theater
-            </Link>
-            <Link href='/events/family' className='text-sm hover:underline'>
-              Family Events
-            </Link>
-          </div>
+    <footer className='container mx-auto px-4 py-8'>
+      <Separator className='mb-5' />
 
-          {/* Social Links and Copyright - Bottom on mobile, left on desktop */}
-          <div className='flex flex-col space-y-4 order-3 md:order-1'>
-            <div className='flex space-x-4'>
-              <SocialIcon
-                icon={siInstagram}
-                href='https://instagram.com'
-                label='Instagram'
-              />
-              <SocialIcon
-                icon={siX}
-                href='https://twitter.com'
-                label='Twitter'
-              />
-              <SocialIcon
-                icon={siLinkedin}
-                href='https://linkedin.com'
-                label='LinkedIn'
-              />
-              <SocialIcon
-                icon={siGithub}
-                href='https://github.com/yourusername/event-finder-app'
-                label='GitHub'
-              />
+      <div className='flex flex-col md:flex-row md:justify-between space-y-2 md:items-end'>
+        {/* Quick Search Links - Two columns */}
+        <div className='flex flex-col space-y-2 order-2 md:order-2 mt-8 md:mt-0'>
+          <h4 className='font-semibold mb-2'>Quick Search</h4>
+          <div className='grid grid-cols-2 gap-4'>
+            {/* Event Types Column */}
+            <div className='flex flex-col space-y-2'>
+              <Link href='/events/music' className='text-sm hover:underline'>
+                Music Events
+              </Link>
+              <Link href='/events/sports' className='text-sm hover:underline'>
+                Sports Events
+              </Link>
+              <Link href='/events/arts' className='text-sm hover:underline'>
+                Arts & Theater
+              </Link>
+              <Link href='/events/family' className='text-sm hover:underline'>
+                Film Events
+              </Link>
             </div>
-            <p className='text-xs text-gray-600'>
-              © {currentYear} Event Finder App. All rights reserved.
-            </p>
-          </div>
 
-          {/* Legal Links - Middle on mobile, right on desktop */}
-          <div className='flex flex-col space-y-2 order-2 md:order-3'>
-            <Link href='/terms' className='text-sm hover:underline'>
-              Terms of Use
-            </Link>
-            <Link href='/privacy' className='text-sm hover:underline'>
-              Privacy Policy
-            </Link>
+            {/* Cities Column */}
+            <div className='flex flex-col space-y-2'>
+              <Link href='/events/new-york' className='text-sm hover:underline'>
+                Events in Istanbul
+              </Link>
+              <Link
+                href='/events/los-angeles'
+                className='text-sm hover:underline'
+              >
+                Events in Ankara
+              </Link>
+              <Link href='/events/chicago' className='text-sm hover:underline'>
+                Events in Izmir
+              </Link>
+              <Link href='/events/miami' className='text-sm hover:underline'>
+                Events in Antalya
+              </Link>
+            </div>
           </div>
+        </div>
+
+        {/* Social Links and Copyright - Bottom on mobile, left on desktop */}
+        <div className='flex flex-col space-y-4 order-1 md:order-1'>
+          <div className='flex space-x-4'>
+            <SocialIcon
+              icon={siInstagram}
+              href='https://instagram.com'
+              label='Instagram'
+            />
+            <SocialIcon icon={siX} href='https://twitter.com' label='Twitter' />
+            <SocialIcon
+              icon={siLinkedin}
+              href='https://linkedin.com'
+              label='LinkedIn'
+            />
+            <SocialIcon
+              icon={siGithub}
+              href='https://github.com/yourusername/event-finder-app'
+              label='GitHub'
+            />
+          </div>
+          <p className='text-xs text-gray-600'>
+            © {currentYear} Can Kiziloglu.
+          </p>
+          <Separator className='md:hidden' />
+        </div>
+
+        {/* Legal Links - Middle on mobile, right on desktop */}
+        <div className='flex flex-col space-y-2 order-2 md:order-3'>
+          <Link href='/terms' className='text-sm hover:underline'>
+            Terms of Use
+          </Link>
+          <Link href='/privacy' className='text-sm hover:underline'>
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>
