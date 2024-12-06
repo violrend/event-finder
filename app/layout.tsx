@@ -1,9 +1,7 @@
-import { Inter } from 'next/font/google'
+import { inter, noto_serif } from './fonts/fonts'
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/header"
 import "./globals.css"
-
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "Event Finder App",
@@ -16,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html lang="en" className={`${inter.variable} ${noto_serif.variable}`} suppressHydrationWarning>
+      <body className={noto_serif.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
