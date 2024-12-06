@@ -38,13 +38,13 @@ export function SearchForm() {
       <div className='flex flex-col md:flex-row gap-4'>
         <Input
           type='text'
-          placeholder='Enter city'
+          placeholder='City'
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className='flex-grow'
+          className='w-full md:w-1/3 text-sm md-text-md'
         />
         <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger className='w-full md:w-[180px]'>
+          <SelectTrigger className='w-full md:w-1/3 text-sm md-text-md'>
             <SelectValue placeholder='Category' />
           </SelectTrigger>
           <SelectContent>
@@ -55,7 +55,7 @@ export function SearchForm() {
             ))}
           </SelectContent>
         </Select>
-        <DatePickerWithRange date={date} setDate={setDate} />
+        <DatePickerWithRange date={date} setDate={setDate} className='w-full md:w-1/3'/>
       </div>
       <Button type='submit' className='w-full'>
         <Search className='mr-2 h-4 w-4' /> Search Events

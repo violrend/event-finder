@@ -70,7 +70,6 @@ body {
   }
   body {
     @apply bg-background text-foreground;
-    @apply outline-transparent
   }
   p {
     @apply font-noto_serif;

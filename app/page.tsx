@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-[90dvh] flex flex-col">
       <section className="relative top-[-4rem] z-10 h-[60vh] flex items-center justify-center">
         <Image
           src="/hero-background.jpg"
@@ -17,7 +17,7 @@ export default function Home() {
           Find events in Turkey
         </h1>
       </section>
-      <section className="flex-grow mt-[-4rem] flex items-center justify-center p-4 md:p-8 bg-gray-50">
+      <section className="container flex-grow mt-[-4rem] flex items-center justify-center p-4 md:p-8">
         <SearchForm />
       </section>
     </main>
