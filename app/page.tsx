@@ -1,19 +1,25 @@
+import { SearchForm } from "@/components/search-form";
+import Image from "next/image";
+
 export default function Home() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="mb-4">Welcome to Event Finder</h1>
-      <h2 className="mb-3">Discover Amazing Events</h2>
-      <h3 className="mb-2">Find Events by Category</h3>
-      <h4 className="mb-2">Popular Cities</h4>
-      <p className="mb-4">
-        This is some normal text using the Forum font. It should be easy to read
-        and provide a nice contrast with the Inter font used in headings.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod,
-        nisi vel consectetur interdum, nisl nunc egestas nunc, vitae
-        tincidunt nisl nunc euismod nunc.
-      </p>
+    <main className="min-h-screen flex flex-col">
+      <section className="relative top-[-4rem] z-10 h-[60vh] flex items-center justify-center">
+        <Image
+          src="/hero-background.jpg"
+          alt="Events in Turkey"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <h1 className="relative z-10 lg:text-6xl font-bold text-white text-center">
+          Find events in Turkey
+        </h1>
+      </section>
+      <section className="flex-grow mt-[-4rem] flex items-center justify-center p-4 md:p-8 bg-gray-50">
+        <SearchForm />
+      </section>
     </main>
   )
 }

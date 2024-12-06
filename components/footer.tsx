@@ -39,11 +39,11 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0">
           {/* Quick Search Links - Top on mobile, middle on desktop */}
           <div className="flex flex-col space-y-2 order-1 md:order-2">
-            <h3 className="font-semibold text-lg mb-2">Quick Search</h3>
-            <Link href="/events/music" className="hover:underline">Music Events</Link>
-            <Link href="/events/sports" className="hover:underline">Sports Events</Link>
-            <Link href="/events/arts" className="hover:underline">Arts & Theater</Link>
-            <Link href="/events/family" className="hover:underline">Family Events</Link>
+            <h4 className="font-semibold mb-2">Quick Search</h4>
+            <Link href="/events/music" className="text-sm hover:underline">Music Events</Link>
+            <Link href="/events/sports" className="text-sm hover:underline">Sports Events</Link>
+            <Link href="/events/arts" className="text-sm hover:underline">Arts & Theater</Link>
+            <Link href="/events/family" className="text-sm hover:underline">Family Events</Link>
           </div>
 
           {/* Social Links and Copyright - Bottom on mobile, left on desktop */}
@@ -54,15 +54,15 @@ const Footer = () => {
               <SocialIcon icon={siLinkedin} href="https://linkedin.com" label="LinkedIn" />
               <SocialIcon icon={siGithub} href="https://github.com/yourusername/event-finder-app" label="GitHub" />
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-xs text-gray-600">
               © {currentYear} Event Finder App. All rights reserved.
             </p>
           </div>
 
           {/* Legal Links - Middle on mobile, right on desktop */}
           <div className="flex flex-col space-y-2 order-2 md:order-3">
-            <Link href="/terms" className="hover:underline">Terms of Use</Link>
-            <Link href="/privacy" className="hover:underline">Privacy Policy</Link>
+            <Link href="/terms" className="text-sm hover:underline">Terms of Use</Link>
+            <Link href="/privacy" className="text-sm hover:underline">Privacy Policy</Link>
           </div>
         </div>
       </div>
