@@ -3,7 +3,7 @@ import { EventRow } from './event-row'
 import { RemovableFilterBadge } from './removable-filter-badge'
 import { format } from 'date-fns'
 import { EventSummaryType, EventType, SearchParamsType } from "@/lib/types"
-import { fetchEventsAPI } from "@/api/api"
+import { categories, fetchEventsAPI } from "@/api/api"
 
 async function fetchEvents({ searchParams }: { searchParams: SearchParamsType }) {
   try {
@@ -14,6 +14,7 @@ async function fetchEvents({ searchParams }: { searchParams: SearchParamsType })
     return [] as EventType[]
   }
 }
+
 
 export async function EventResults({ searchParams }: { searchParams: SearchParamsType }) {
   
@@ -38,8 +39,11 @@ export async function EventResults({ searchParams }: { searchParams: SearchParam
   const getFilterBadges = (params: SearchParamsType) => {
     const badges = []
 
+    const cat =
+      categories.find((cat) => cat.value === params.category)?.label || '';
+    
     const city = params.city || '';
-    const category = params.category || '';
+    const category = cat || '';
     const startDateTime = params.startDateTime || '';
     const endDateTime = params.endDateTime || '';
     

@@ -8,7 +8,8 @@ export default function EventsPage({
   searchParams,
 }: {
   searchParams: SearchParamsType;
-}) {
+  }) {
+  
   const category =
     categories.find((cat) => cat.value === searchParams.category)?.label || '';
 
