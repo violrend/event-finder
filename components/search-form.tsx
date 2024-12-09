@@ -39,9 +39,9 @@ export function SearchForm() {
   return (
     <form onSubmit={handleSubmit} className='w-full max-w-3xl space-y-4'>
       <div className='flex flex-col md:flex-row gap-4 justify-between'>
-        <div className='w-full md:w-1/3 text-base'>
+        <div>
           <Select value={city} onValueChange={(value) => setCity(value)}>
-            <SelectTrigger className='h-8 col-span-2'>
+            <SelectTrigger className='w-full md:w-1/3 text-base'>
               <SelectValue placeholder='Select city' />
             </SelectTrigger>
             <SelectContent>

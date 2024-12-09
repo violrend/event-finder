@@ -43,8 +43,7 @@ export async function fetchEventsAPI(params: SearchParamsType) {
     url += `&startDateTime=${format(startDateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
   if (endDateTime)
     url += `&endDateTime=${format(endDateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
-  console.log(params);
-  console.log(url);
+  
   const response = await fetch(url);
   const data = await response.json();
 

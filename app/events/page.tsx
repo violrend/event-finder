@@ -4,14 +4,13 @@ import { FilterDropdown } from './filter-dropdown';
 import Image from 'next/image';
 import { categories } from '@/api/api';
 
-export default function EventsPage({
+export default async function EventsPage({
   searchParams,
 }: {
   searchParams: SearchParamsType;
-  }) {
-  
+}) {
   const category =
-    categories.find((cat) => cat.value === searchParams.category)?.label || '';
+    await categories.find((cat) => cat.value === searchParams.category)?.label || '';
 
   return (
     <main className='flex flex-col'>
