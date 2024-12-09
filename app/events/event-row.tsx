@@ -30,6 +30,7 @@ export function EventRow({ event }: { event: Event }) {
         <div className="text-sm text-gray-500 md:hidden">
           {event.category} • {event.venue} • {event.date}
         </div>
+        {/* TODO: make this 3 rows with date pushed to right */}
       </TableCell>
       <TableCell className="hidden md:table-cell">{event.category}</TableCell>
       <TableCell className="hidden md:table-cell">{event.venue}</TableCell>

@@ -13,16 +13,18 @@ import {
 import { DatePickerWithRange } from '@/components/date-range-picker';
 import { Search } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
-import { getCities, categories, categoryList } from '@/api/api';
-console.log(categoryList)
+import { getCities, categories } from '@/api/api';
+
 export function SearchForm() {
   const [city, setCity] = useState('');
   const [searchCityValue, setSearchCityValue] = useState('');
   const [date, setDate] = useState<DateRange | undefined>(undefined);
   const [category, setCategory] = useState('');
 
+  // Get cities data
   const data = getCities(searchCityValue);
 
+  // TODO: Pass search parameter to url and navigate to events page
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle search logic here

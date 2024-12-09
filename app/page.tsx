@@ -12,7 +12,7 @@ export default function Home() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/40" />
         <h1 className="relative z-10 lg:text-6xl font-bold text-white text-center">
           Find events in Turkey
         </h1>

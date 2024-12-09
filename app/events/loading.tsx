@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 export default function Loading() {
   return (
+    // TODO: Add filter skeleton
     <Table>
       <TableHeader>
         <TableRow>

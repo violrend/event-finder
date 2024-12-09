@@ -1,65 +1,64 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { AutoComplete } from "@/components/ui/autocomplete"
+import { DatePickerWithRange } from "@/components/date-range-picker"
+import { getCities, categories } from "@/api/api"
+import { DateRange } from 'react-day-picker'
 
-export function EventFilters({ initialFilters }: { initialFilters: { [key: string]: string | string[] | undefined } }) {
-  const router = useRouter()
-  const [filters, setFilters] = useState({
+type Filter = {
+  city: string
+  category: string
+  date: DateRange | undefined
+}
+
+export function EventFilters(initialFilters: Filter) {
+  // const router = useRouter()
+  const [filters, setFilters] = useState<Filter>({
     city: initialFilters.city || '',
-    category: Array.isArray(initialFilters.category) ? initialFilters.category[0] || '' : initialFilters.category || '',
-    date: initialFilters.date || ''
+    category: initialFilters.category || '',
+    date: initialFilters.date || undefined
   })
+  const [searchCityValue, setSearchCityValue] = useState('');
 
-  const handleFilterChange = (key: string, value: string) => {
+  // Get cities data
+  const data = getCities(searchCityValue);
+
+  const handleFilterChange = (key: string, value: string | DateRange | undefined) => {
     setFilters(prev => ({ ...prev, [key]: value }))
-  }
-
-  const applyFilters = () => {
-    const searchParams = new URLSearchParams(filters as Record<string, string>)
-    router.push(`/search?${searchParams.toString()}`)
+    console.log(filters)
+    // TODO: Pass search parameter to url and navigate to events page
+    // const searchParams = new URLSearchParams(filters as Record<string, string>)
+    // router.push(`/search?${searchParams.toString()}`)
   }
 
   return (
-    <div className="flex flex-col gap-4 mb-6 md:flex-row md:items-end">
-      <div className="flex-1">
-        <Label htmlFor="city">City</Label>
-        <Input
-          id="city"
-          value={filters.city}
-          onChange={(e) => handleFilterChange('city', e.target.value)}
-          placeholder="Enter city"
-        />
-      </div>
-      <div className="flex-1">
-        <Label htmlFor="category">Category</Label>
+    <div className='flex flex-col md:flex-row gap-4 justify-between'>
+        <div className='w-full md:w-1/3'>
+          <AutoComplete
+            selectedValue={filters.city}
+            onSelectedValueChange={(value) => handleFilterChange('city', value)}
+            searchValue={searchCityValue}
+            onSearchValueChange={setSearchCityValue}
+            items={data ?? []}
+            placeholder='Enter City'
+          />
+        </div>
         <Select value={filters.category} onValueChange={(value) => handleFilterChange('category', value)}>
-          <SelectTrigger id="category">
-            <SelectValue placeholder="Select category" />
+          <SelectTrigger className='w-full md:w-1/3 text-base'>
+            <SelectValue placeholder='Select Category' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="music">Music</SelectItem>
-            <SelectItem value="sports">Sports</SelectItem>
-            <SelectItem value="arts">Arts & Theater</SelectItem>
-            <SelectItem value="family">Family</SelectItem>
+            {categories.map((cat) => (
+              <SelectItem key={cat.value} value={cat.value}>
+                {cat.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
+        <DatePickerWithRange date={filters.date} setDate={(value) => handleFilterChange('date', value)} className='w-full md:w-1/3'/>
       </div>
-      <div className="flex-1">
-        <Label htmlFor="date">Date</Label>
-        <Input
-          id="date"
-          type="date"
-          value={filters.date}
-          onChange={(e) => handleFilterChange('date', e.target.value)}
-        />
-      </div>
-      <Button onClick={applyFilters}>Apply Filters</Button>
-    </div>
   )
 }
 

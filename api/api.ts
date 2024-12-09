@@ -1,14 +1,18 @@
 import cities from './cities.json';
 import classifications from './classifications.json';
 
-export function getCities(filter: string) {
-  const lowerFilter = filter.toLocaleLowerCase();
-  return cities
+export function getCities(filter?: string) {
+  const lowerFilter = filter?.toLocaleLowerCase();
+  if (lowerFilter) return cities
     .filter(({ name }) => name.toLocaleLowerCase().startsWith(lowerFilter))
     .map(({ name, id }) => ({
       value: id,
       label: `${name}`,
     }));
+  else return cities.map(({ name, id }) => ({
+    value: id,
+    label: `${name}`,
+  }));
 }
 
 export const categoryList = classifications._embedded.classifications
