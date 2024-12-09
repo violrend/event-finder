@@ -1,19 +1,11 @@
 'use client'
 
 import { TableCell, TableRow } from "@/components/ui/table"
+import { EventSummaryType } from "@/lib/types"
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-interface Event {
-  id: string
-  name: string
-  category: string
-  venue: string
-  date: string
-  image: string
-}
-
-export function EventRow({ event }: { event: Event }) {
+export function EventRow({ event }: { event: EventSummaryType }) {
   const router = useRouter()
 
   const handleRowClick = () => {

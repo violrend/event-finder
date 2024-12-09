@@ -2,24 +2,23 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components
 import { EventRow } from './event-row'
 import { RemovableFilterBadge } from './removable-filter-badge'
 import { format } from 'date-fns'
-import { SearchParamsType } from "@/lib/types"
+import { EventSummaryType, EventType, SearchParamsType } from "@/lib/types"
+import { fetchEventsAPI } from "@/api/api"
 
-// TODO: This is a mock function. Replace it with actual API call to Ticketmaster
 async function fetchEvents(searchParams: SearchParamsType) {
-  // Simulate API call
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  console.log(searchParams)
-  
-  // Mock data
-  return [
-    { id: '1', name: 'Concert A', category: 'Music', venue: 'Stadium X', date: '2023-07-15T20:00:00', image: 'https://picsum.photos/200' },
-    { id: '2', name: 'Sports Event B', category: 'Sports', venue: 'Arena Y', date: '2023-07-20T15:30:00', image: 'https://picsum.photos/200' },
-    { id: '3', name: 'Theater Show C', category: 'Arts', venue: 'Theater Z', date: '2023-07-25T19:00:00', image: 'https://picsum.photos/200' },
-  ]
+  // Put the fetch function in a try catch block
+  // If there is an error, return an empty array
+  try {
+    return await fetchEventsAPI(searchParams)
+  }
+  catch (error) {
+    console.error(error)
+    return [] as EventType[]
+  }
 }
 
 export async function EventResults({ searchParams }: { searchParams: SearchParamsType }) {
-  const events = await fetchEvents(searchParams)
+  const events:EventType[] = await fetchEvents(searchParams)
 
   const formatDateRange = (start: string, end: string) => {
     const startDate = new Date(start)
@@ -56,6 +55,16 @@ export async function EventResults({ searchParams }: { searchParams: SearchParam
     return badges
   }
 
+  const eventSummary:EventSummaryType[] = events.map((event: EventType) => ({
+    id: event.id,
+    name: event.name,
+    date: `${event.date.localDate} ${event.date.localTime}`,
+    image: event.images.find((image) => image.includes('TABLET_LANDSCAPE_LARGE')) ?? '',
+    category: event.segment.name,
+    venue: event.venue,
+  }))
+
+
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
@@ -78,7 +87,7 @@ export async function EventResults({ searchParams }: { searchParams: SearchParam
           </TableRow>
         </TableHeader>
         <TableBody>
-          {events.map(event => (
+          {eventSummary.map((event: EventSummaryType) => (
             <EventRow key={event.id} event={{
               ...event,
               date: format(new Date(event.date), 'MMM d, yyyy h:mm a')
