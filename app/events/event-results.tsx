@@ -5,20 +5,23 @@ import { format } from 'date-fns'
 import { EventSummaryType, EventType, SearchParamsType } from "@/lib/types"
 import { fetchEventsAPI } from "@/api/api"
 
-async function fetchEvents(searchParams: SearchParamsType) {
-  // Put the fetch function in a try catch block
-  // If there is an error, return an empty array
+async function fetchEvents({ searchParams }: { searchParams: SearchParamsType }) {
   try {
-    return await fetchEventsAPI(searchParams)
-  }
-  catch (error) {
+    const response = await fetchEventsAPI(searchParams)
+    return response || [] // Ensure we return empty array if response is null/undefined
+  } catch (error) {
     console.error(error)
     return [] as EventType[]
   }
 }
 
 export async function EventResults({ searchParams }: { searchParams: SearchParamsType }) {
-  const events:EventType[] = await fetchEvents(searchParams)
+  
+  const events: EventType[] = await fetchEvents({ searchParams })
+
+  if (!events || events.length === 0) {
+    return <div>No events found</div>
+  }
 
   const formatDateRange = (start: string, end: string) => {
     const startDate = new Date(start)

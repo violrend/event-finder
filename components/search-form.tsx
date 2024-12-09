@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { AutoComplete } from '@/components/ui/autocomplete';
+
 import {
   Select,
   SelectContent,
@@ -10,39 +10,48 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { DatePickerWithRange } from '@/components/date-range-picker';
+
 import { Search } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 import { getCities, categories } from '@/api/api';
+import { DatePickerWithPresets } from './date-picker-with-presets';
 
 export function SearchForm() {
   const [city, setCity] = useState('');
-  const [searchCityValue, setSearchCityValue] = useState('');
   const [date, setDate] = useState<DateRange | undefined>(undefined);
   const [category, setCategory] = useState('');
 
   // Get cities data
-  const data = getCities(searchCityValue);
+  const cities = getCities();
 
   // TODO: Pass search parameter to url and navigate to events page
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle search logic here
-    console.log({ city, category, date });
+    const searchParams = new URLSearchParams();
+    if (city) searchParams.set('city', city);
+    if (category) searchParams.set('category', category);
+    if (date?.from) searchParams.set('startDate', date.from.toISOString());
+    if (date?.to) searchParams.set('endDate', date.to.toISOString());
+
+    window.location.href = `/events?${searchParams.toString()}`;
   };
 
   return (
     <form onSubmit={handleSubmit} className='w-full max-w-3xl space-y-4'>
       <div className='flex flex-col md:flex-row gap-4 justify-between'>
-        <div className='w-full md:w-1/3'>
-          <AutoComplete
-            selectedValue={city}
-            onSelectedValueChange={setCity}
-            searchValue={searchCityValue}
-            onSearchValueChange={setSearchCityValue}
-            items={data ?? []}
-            placeholder='Enter City'
-          />
+        <div className='w-full md:w-1/3 text-base'>
+          <Select value={city} onValueChange={(value) => setCity(value)}>
+            <SelectTrigger className='h-8 col-span-2'>
+              <SelectValue placeholder='Select city' />
+            </SelectTrigger>
+            <SelectContent>
+              {cities.map((city) => (
+                <SelectItem key={city.value} value={city.label}>
+                  {city.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <Select value={category} onValueChange={setCategory}>
           <SelectTrigger className='w-full md:w-1/3 text-base'>
@@ -56,7 +65,11 @@ export function SearchForm() {
             ))}
           </SelectContent>
         </Select>
-        <DatePickerWithRange date={date} setDate={setDate} className='w-full md:w-1/3'/>
+        <DatePickerWithPresets
+          date={date}
+          setDate={setDate}
+          className='w-full md:w-1/3'
+        />
       </div>
       <Button type='submit' className='w-full'>
         <Search className='mr-2 h-4 w-4' /> <h5>Search Events</h5>
