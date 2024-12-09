@@ -9,8 +9,8 @@ export default async function EventsPage({
 }: {
   searchParams: SearchParamsType;
 }) {
-  const category =
-    await categories.find((cat) => cat.value === searchParams.category)?.label || '';
+  const { city, category } = await searchParams;
+  const cat = categories.find((cat) => cat.value === category)?.label || '';
 
   return (
     <main className='flex flex-col'>
@@ -24,12 +24,12 @@ export default async function EventsPage({
         />
         <div className='absolute inset-0 bg-black/40' />
         <h1 className='relative z-10 text-3xl lg:text-4xl font-bold text-white text-center'>
-          {searchParams.city && category
-            ? `${category} Events in ${searchParams.city}`
-            : searchParams.city
-            ? `Events in ${searchParams.city}`
-            : category
-            ? `Events in ${category}`
+          {city && cat
+            ? `${cat} Events in ${city}`
+            : city
+            ? `Events in ${city}`
+            : cat
+            ? `Events in ${cat}`
             : 'Events in Turkey'}
         </h1>
       </section>

@@ -35,7 +35,7 @@ export const categories = [
 ];
 
 export async function fetchEventsAPI(params: SearchParamsType) {
-  const { city, category, startDateTime, endDateTime } = params;
+  const { city, category, startDateTime, endDateTime } = await params;
   let url = `https://app.ticketmaster.com/discovery/v2/events.json?countryCode=TR&apikey=${process.env.TM_API_KEY}`;
   if (city) url += `&city=${city}`;
   if (category) url += `&classificationId=${category}`;

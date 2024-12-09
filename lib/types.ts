@@ -6,12 +6,12 @@ export type FilterType = {
   dateRange: DateRange | undefined;
 };
 
-export type SearchParamsType = {
+export type SearchParamsType = Promise<{
   city?: string;
   category?: string;
   startDateTime?: string;
   endDateTime?: string;
-};
+}>;
 
 export type EventType = {
   id: string;

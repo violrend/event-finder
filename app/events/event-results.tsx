@@ -36,22 +36,18 @@ export async function EventResults({ searchParams }: { searchParams: SearchParam
     }
   }
 
-  const getFilterBadges = (params: SearchParamsType) => {
+  const getFilterBadges = async (params: SearchParamsType) =>  {
     const badges = []
-
+    const { city, category, startDateTime, endDateTime } = await params;
     const cat =
-      categories.find((cat) => cat.value === params.category)?.label || '';
+      categories.find((cat) => cat.value === category)?.label || '';
     
-    const city = params.city || '';
-    const category = cat || '';
-    const startDateTime = params.startDateTime || '';
-    const endDateTime = params.endDateTime || '';
     
     if (city) {
       badges.push({ key: 'city', value: city as string })
     }
-    if (category) {
-      badges.push({ key: 'category', value: category as string })
+    if (cat) {
+      badges.push({ key: 'category', value: cat as string })
     }
     if (startDateTime && endDateTime) {
       badges.push({
@@ -75,7 +71,7 @@ export async function EventResults({ searchParams }: { searchParams: SearchParam
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-4">
-        {getFilterBadges(searchParams).map((badge) => (
+        {(await getFilterBadges(searchParams)).map((badge) => (
           <RemovableFilterBadge
             key={badge.key}
             filterKey={badge.key}
