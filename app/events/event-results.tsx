@@ -70,7 +70,7 @@ export async function EventResults({ searchParams }: { searchParams: SearchParam
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-2">
         {(await getFilterBadges(searchParams)).map((badge) => (
           <RemovableFilterBadge
             key={badge.key}
@@ -82,7 +82,7 @@ export async function EventResults({ searchParams }: { searchParams: SearchParam
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Image</TableHead>
+            <TableHead className="w-[100px]"></TableHead>
             <TableHead>Event Details</TableHead>
             <TableHead className="hidden md:table-cell">Category</TableHead>
             <TableHead className="hidden md:table-cell">Venue</TableHead>

@@ -39,22 +39,20 @@ export function SearchForm() {
   return (
     <form onSubmit={handleSubmit} className='w-full max-w-3xl space-y-4'>
       <div className='flex flex-col md:flex-row gap-4 justify-between'>
-        <div>
-          <Select value={city} onValueChange={(value) => setCity(value)}>
-            <SelectTrigger className='w-full md:w-1/3 text-base'>
-              <SelectValue placeholder='Select city' />
-            </SelectTrigger>
-            <SelectContent>
-              {cities.map((city) => (
-                <SelectItem key={city.value} value={city.label}>
-                  {city.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Select value={city} onValueChange={setCity}>
+          <SelectTrigger className='w-full md:w-1/3'>
+            <SelectValue placeholder='Select city' />
+          </SelectTrigger>
+          <SelectContent>
+            {cities.map((city) => (
+              <SelectItem key={city.value} value={city.label}>
+                {city.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger className='w-full md:w-1/3 text-base'>
+          <SelectTrigger className='w-full md:w-1/3'>
             <SelectValue placeholder='Select Category' />
           </SelectTrigger>
           <SelectContent>

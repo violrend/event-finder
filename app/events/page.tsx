@@ -33,7 +33,7 @@ export default async function EventsPage({
             : 'Events in Turkey'}
         </h1>
       </section>
-      <section className='container px-2 md:px-4 -mt-4'>
+      <section className='container px-2 md:px-4 -mt-12 mb-4'>
         <FilterDropdown />
       </section>
       <section className='container px-2 md:px-4 -mt-4'>

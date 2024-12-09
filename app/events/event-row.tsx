@@ -19,8 +19,9 @@ export function EventRow({ event }: { event: EventSummaryType }) {
       </TableCell>
       <TableCell>
         <div className="font-semibold">{event.name}</div>
+        <div className="text-sm text-gray-500 md:hidden">{event.venue}</div>
         <div className="text-sm text-gray-500 md:hidden">
-          {event.category} • {event.venue} • {event.date}
+          {event.category} • {event.date}
         </div>
         {/* TODO: make this 3 rows with date pushed to right */}
       </TableCell>
