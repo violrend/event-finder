@@ -66,35 +66,56 @@ const Footer = () => {
           <div className='grid grid-cols-2 gap-4'>
             {/* Event Types Column */}
             <div className='flex flex-col space-y-2'>
-              <Link href='/events/music' className='text-sm hover:underline'>
+              <Link
+                href='/events?category=KZFzniwnSyZfZ7v7nJ'
+                className='text-sm hover:underline'
+              >
                 Music Events
               </Link>
-              <Link href='/events/sports' className='text-sm hover:underline'>
+              <Link
+                href='/events?category=KZFzniwnSyZfZ7v7nE'
+                className='text-sm hover:underline'
+              >
                 Sports Events
               </Link>
-              <Link href='/events/arts' className='text-sm hover:underline'>
+              <Link
+                href='/events?category=KZFzniwnSyZfZ7v7na'
+                className='text-sm hover:underline'
+              >
                 Arts & Theater
               </Link>
-              <Link href='/events/family' className='text-sm hover:underline'>
+              <Link
+                href='/events?category=KZFzniwnSyZfZ7v7nn'
+                className='text-sm hover:underline'
+              >
                 Film Events
               </Link>
             </div>
 
             {/* Cities Column */}
             <div className='flex flex-col space-y-2'>
-              <Link href='/events/new-york' className='text-sm hover:underline'>
+              <Link
+                href='/events?city=%C4%B0stanbul'
+                className='text-sm hover:underline'
+              >
                 Events in Istanbul
               </Link>
               <Link
-                href='/events/los-angeles'
+                href='/events?city=Ankara'
                 className='text-sm hover:underline'
               >
                 Events in Ankara
               </Link>
-              <Link href='/events/chicago' className='text-sm hover:underline'>
+              <Link
+                href='/events?city=%C4%B0zmir'
+                className='text-sm hover:underline'
+              >
                 Events in Izmir
               </Link>
-              <Link href='/events/miami' className='text-sm hover:underline'>
+              <Link
+                href='/events?city=Antalya'
+                className='text-sm hover:underline'
+              >
                 Events in Antalya
               </Link>
             </div>

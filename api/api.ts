@@ -31,7 +31,7 @@ export const categories = [
   { value: 'KZFzniwnSyZfZ7v7nE', label: 'Sports' },
   { value: 'KZFzniwnSyZfZ7v7na', label: 'Arts & Theatre' },
   { value: 'KZFzniwnSyZfZ7v7nn', label: 'Film' },
-  { value: '[KZFzniwnSyZfZ7v7n1, KZFzniwnSyZfZ7v7nl]', label: 'Other' },
+  { value: 'KZFzniwnSyZfZ7v7n1,KZFzniwnSyZfZ7v7nl', label: 'Other' },
 ];
 
 export async function fetchEventsAPI(params: SearchParamsType) {
