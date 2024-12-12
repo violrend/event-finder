@@ -38,19 +38,23 @@ const Footer = () => {
         <div className='flex flex-col space-y-4'>
           <div className='flex space-x-4'>
             <SocialIcon
-              icon={siInstagram}
-              href='https://instagram.com'
-              label='Instagram'
-            />
-            <SocialIcon icon={siX} href='https://twitter.com' label='Twitter' />
-            <SocialIcon
               icon={siLinkedin}
-              href='https://linkedin.com'
+              href='https://linkedin.com/in/cankiziloglu'
               label='LinkedIn'
             />
             <SocialIcon
+              icon={siX}
+              href='http://x.com/cankiziloglu'
+              label='X'
+            />
+            <SocialIcon
+              icon={siInstagram}
+              href='https://instagram.com/cankiziloglu'
+              label='Instagram'
+            />
+            <SocialIcon
               icon={siGithub}
-              href='https://github.com/yourusername/event-finder-app'
+              href='https://github.com/cankiziloglu/event-finder'
               label='GitHub'
             />
           </div>
