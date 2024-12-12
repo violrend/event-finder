@@ -30,8 +30,8 @@ export function SearchForm() {
     const searchParams = new URLSearchParams();
     if (city) searchParams.set('city', city);
     if (category) searchParams.set('category', category);
-    if (date?.from) searchParams.set('startDate', date.from.toISOString());
-    if (date?.to) searchParams.set('endDate', date.to.toISOString());
+    if (date?.from) searchParams.set('startDateTime', date.from.toISOString());
+    if (date?.to) searchParams.set('endDateTime', date.to.toISOString());
 
     window.location.href = `/events?${searchParams.toString()}`;
   };

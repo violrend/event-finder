@@ -19,8 +19,10 @@ export function RemovableFilterBadge({ filterKey, filterValue }: RemovableFilter
     if (filterKey === 'daterange') {
       newSearchParams.delete('startDateTime')
       newSearchParams.delete('endDateTime')
+      newSearchParams.set('page', '0')
     } else {
       newSearchParams.delete(filterKey)
+      newSearchParams.set('page', '0')
     }
     router.push(`/events?${newSearchParams.toString()}`)
   }

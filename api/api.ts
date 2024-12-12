@@ -1,4 +1,4 @@
-import { ApiDataType, EventType, SearchParamsType } from '@/lib/types';
+import { ApiDataType, EventType, PaginationType, SearchParamsType } from '@/lib/types';
 import cities from './cities.json';
 import classifications from './classifications.json';
 import { format } from 'date-fns';
@@ -35,7 +35,7 @@ export const categories = [
 ];
 
 export async function fetchEventsAPI(params: SearchParamsType) {
-  const { city, category, startDateTime, endDateTime } = await params;
+  const { city, category, startDateTime, endDateTime, page } = await params;
   let url = `https://app.ticketmaster.com/discovery/v2/events.json?countryCode=TR&apikey=${process.env.TM_API_KEY}`;
   if (city) url += `&city=${city}`;
   if (category) url += `&classificationId=${category}`;
@@ -43,7 +43,9 @@ export async function fetchEventsAPI(params: SearchParamsType) {
     url += `&startDateTime=${format(startDateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
   if (endDateTime)
     url += `&endDateTime=${format(endDateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
-  
+  if (page) url += `&page=${page}`;
+  if (!page) url += `&page=0`;
+
   const response = await fetch(url);
   const data = await response.json();
 
@@ -81,5 +83,11 @@ export async function fetchEventsAPI(params: SearchParamsType) {
     })
   );
 
-  return events;
+  const pagination: PaginationType = {
+    totalElements: data.page.totalElements,
+    totalPages: data.page.totalPages,
+    currentPage: data.page.number,
+  };
+
+  return { events, pagination };
 }

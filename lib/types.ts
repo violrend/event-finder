@@ -4,6 +4,7 @@ export type FilterType = {
   city: string;
   category: string;
   dateRange: DateRange | undefined;
+  page: number;
 };
 
 export type SearchParamsType = Promise<{
@@ -11,7 +12,14 @@ export type SearchParamsType = Promise<{
   category?: string;
   startDateTime?: string;
   endDateTime?: string;
+  page?: number;
 }>;
+
+export type PaginationType = {
+  totalElements?: number;
+  totalPages: number;
+  currentPage: number;
+};
 
 export type EventType = {
   id: string;
