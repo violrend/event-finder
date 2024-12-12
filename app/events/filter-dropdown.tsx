@@ -1,6 +1,5 @@
 'use client';
 
-
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,6 +29,7 @@ export function FilterDropdown() {
     city: '',
     category: '',
     dateRange: undefined,
+    page: 0,
   });
 
   useEffect(() => {
@@ -44,13 +44,16 @@ export function FilterDropdown() {
           ? new Date(searchParams.get('endDateTime')!)
           : undefined,
       },
+      page: searchParams.get('page') ? parseInt(searchParams.get('page')!) : 0,
     });
   }, [searchParams]);
 
-
-  const handleFilterChange = (key: string, value: string | DateRange | undefined) => {
-    setLocalFilters(prev => ({ ...prev, [key]: value }))
-  }
+  const handleFilterChange = (
+    key: string,
+    value: string | DateRange | undefined
+  ) => {
+    setLocalFilters((prev) => ({ ...prev, [key]: value }));
+  };
 
   const applyFilters = () => {
     const newSearchParams = new URLSearchParams();
@@ -76,11 +79,11 @@ export function FilterDropdown() {
       city: '',
       category: '',
       dateRange: undefined,
+      page: 0,
     });
     router.push('/events');
     setOpen(false);
   };
-
 
   // Get cities data
   const cities = getCities();
@@ -142,9 +145,9 @@ export function FilterDropdown() {
               />
             </div>
             <Button onClick={applyFilters}>Apply Filters</Button>
-          <Button variant='link' onClick={clearFilters} className='mt-2'>
-            Clear Filters
-          </Button>
+            <Button variant='link' onClick={clearFilters} className='mt-2'>
+              Clear Filters
+            </Button>
           </div>
         </div>
       </PopoverContent>
