@@ -1,8 +1,8 @@
 import { SearchParamsType } from '@/lib/types';
-import { EventResults } from './event-results';
-import { FilterDropdown } from './filter-dropdown';
 import Image from 'next/image';
 import { categories } from '@/api/api';
+
+import { EventsPageContent } from './events-page-content';
 
 export default async function EventsPage({
   searchParams,
@@ -19,8 +19,10 @@ export default async function EventsPage({
           src='/hero-background.jpg'
           alt='Events in Turkey'
           fill
+          sizes='100vw'
+          quality={75}
+          priority={true}
           className='object-cover'
-          priority
         />
         <div className='absolute inset-0 bg-black/40' />
         <h1 className='absolute bottom-8 z-50 w-full text-3xl lg:text-4xl font-bold text-white text-center'>
@@ -34,13 +36,8 @@ export default async function EventsPage({
         </h1>
       </section>
       <div className='relative z-0 mt-32 md:mt-20'>
-      <section className='container px-2 md:px-4 mt-4'>
-        <FilterDropdown />
-      </section>
-      <section className='container px-2 md:px-4'>
-        <EventResults searchParams={searchParams} />
-        </section>
-        </div>
+      <EventsPageContent searchParams={searchParams} />
+      </div>
     </main>
   );
 }

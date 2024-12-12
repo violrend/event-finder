@@ -12,6 +12,7 @@ import { EventType, PaginationType, SearchParamsType } from '@/lib/types';
 import { categories, fetchEventsAPI } from '@/api/api';
 import EventPagination from './event-pagination';
 import { Separator } from '@/components/ui/separator';
+import { Suspense } from 'react';
 
 async function fetchEvents({
   searchParams,
@@ -95,13 +96,15 @@ export async function EventResults({
   return (
     <>
       <div className='flex flex-wrap gap-2'>
-        {(await getFilterBadges(searchParams)).map((badge) => (
-          <RemovableFilterBadge
-            key={badge.key}
-            filterKey={badge.key}
-            filterValue={badge.value}
-          />
-        ))}
+        <Suspense fallback={<div>Loading...</div>}>
+          {(await getFilterBadges(searchParams)).map((badge) => (
+            <RemovableFilterBadge
+              key={badge.key}
+              filterKey={badge.key}
+              filterValue={badge.value}
+            />
+          ))}
+        </Suspense>
       </div>
       <Table>
         <TableHeader>
@@ -135,7 +138,7 @@ export async function EventResults({
           ))}
         </TableBody>
       </Table>
-      <Separator className='my-4'/>
+      <Separator className='my-4' />
       <EventPagination searchParams={searchParams} pagination={pagination} />
     </>
   );

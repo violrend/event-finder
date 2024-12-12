@@ -9,8 +9,10 @@ export default function Home() {
           src="/hero-background.jpg"
           alt="Events in Turkey"
           fill
+          sizes="100vw"
+          quality={75}
+          priority={true}
           className="object-cover"
-          priority
         />
         <div className="absolute inset-0 bg-black/40" />
         <h1 className="relative z-10 lg:text-6xl font-bold text-white text-center">
