@@ -14,7 +14,7 @@ export default async function EventsPage({
 
   return (
     <main className='flex flex-col'>
-      <section className='sticky -mt-14 top-0 left-0 right-0 h-[20vh] z-10'>
+      <section className='fixed -mt-14 top-0 left-0 right-0 h-60 md:h-48 z-10'>
         <Image
           src='/hero-background.jpg'
           alt='Events in Turkey'
@@ -23,7 +23,7 @@ export default async function EventsPage({
           priority
         />
         <div className='absolute inset-0 bg-black/40' />
-        <h1 className='absolute bottom-8 w-full text-3xl lg:text-4xl font-bold text-white text-center'>
+        <h1 className='absolute bottom-8 z-50 w-full text-3xl lg:text-4xl font-bold text-white text-center'>
           {city && cat
             ? `${cat} Events in ${city}`
             : city
@@ -33,7 +33,7 @@ export default async function EventsPage({
             : 'Events in Turkey'}
         </h1>
       </section>
-      <div className='relative z-0'>
+      <div className='relative z-0 mt-32 md:mt-20'>
       <section className='container px-2 md:px-4 mt-4'>
         <FilterDropdown />
       </section>

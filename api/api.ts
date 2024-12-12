@@ -91,3 +91,41 @@ export async function fetchEventsAPI(params: SearchParamsType) {
 
   return { events, pagination };
 }
+
+export async function fetchEventById(id: string) {
+  const url = `https://app.ticketmaster.com/discovery/v2/events/${id}?apikey=${process.env.TM_API_KEY}`;
+  
+  const response = await fetch(url);
+  const event: ApiDataType = await response.json();
+  
+  if (!event) {
+    return null;
+  }
+
+  return {
+    id: event.id,
+    name: event.name,
+    url: event.url,
+    images: event.images.map((image: { url: string }) => image.url),
+    date: {
+      localDate: event.dates.start.localDate,
+      localTime: event.dates.start.localTime,
+    },
+    segment: {
+      id: event.classifications[0]?.segment?.id || '',
+      name: event.classifications[0]?.segment?.name || '',
+    },
+    genre: {
+      id: event.classifications[0]?.genre?.id || '',
+      name: event.classifications[0]?.genre?.name || '',
+    },
+    venue: event._embedded.venues[0]?.name || '',
+    city: event._embedded.venues[0]?.city?.name || '',
+    address: event._embedded.venues[0]?.address?.line1 || '',
+    attractions: event._embedded.attractions?.map((attraction) => ({
+      id: attraction.id,
+      name: attraction.name,
+      images: attraction.images.map((image: { url: string }) => image.url),
+    })) || [],
+  };
+}
