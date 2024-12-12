@@ -11,7 +11,8 @@ export default async function EventsPage({
   searchParams: SearchParamsType;
 }) {
   const { city, category } = await searchParams;
-  const catLabel = categories.find((cat) => cat.value === category)?.label || '';
+  const catLabel =
+    categories.find((cat) => cat.value === category)?.label || '';
 
   const cities = getCities();
 
@@ -20,7 +21,7 @@ export default async function EventsPage({
       <section className='fixed -mt-14 top-0 left-0 right-0 h-60 md:h-48 z-10'>
         <Image
           src='/hero-background.jpg'
-          alt='Events in Turkey'
+          alt='Events in Turkiye'
           fill
           sizes='100vw'
           quality={75}
@@ -35,7 +36,7 @@ export default async function EventsPage({
             ? `Events in ${city}`
             : catLabel
             ? `Events in ${catLabel}`
-            : 'Events in Turkey'}
+            : 'Events in Turkiye'}
         </h1>
       </section>
       <div className='relative z-0 mt-32 md:mt-20'>
