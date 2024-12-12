@@ -13,8 +13,8 @@ export default async function EventsPage({
   const cat = categories.find((cat) => cat.value === category)?.label || '';
 
   return (
-    <main className='flex flex-col'>
-      <section className='relative top-[-4rem] z-10 h-[20vh] flex place-items-end justify-center py-8 px-2'>
+    <main className='flex flex-col min-h-screen'>
+      <section className='sticky -mt-14 top-0 left-0 right-0 h-[20vh] z-10'>
         <Image
           src='/hero-background.jpg'
           alt='Events in Turkey'
@@ -23,7 +23,7 @@ export default async function EventsPage({
           priority
         />
         <div className='absolute inset-0 bg-black/40' />
-        <h1 className='relative z-10 text-3xl lg:text-4xl font-bold text-white text-center'>
+        <h1 className='absolute bottom-8 w-full text-3xl lg:text-4xl font-bold text-white text-center'>
           {city && cat
             ? `${cat} Events in ${city}`
             : city
@@ -33,12 +33,14 @@ export default async function EventsPage({
             : 'Events in Turkey'}
         </h1>
       </section>
-      <section className='container px-2 md:px-4 -mt-12 mb-4'>
+      <div className='relative z-0'>
+      <section className='container px-2 md:px-4 mt-4'>
         <FilterDropdown />
       </section>
-      <section className='container px-2 md:px-4 -mt-4'>
+      <section className='container px-2 md:px-4'>
         <EventResults searchParams={searchParams} />
-      </section>
+        </section>
+        </div>
     </main>
   );
 }
