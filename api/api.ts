@@ -40,9 +40,9 @@ export async function fetchEventsAPI(params: SearchParamsType) {
   if (city) url += `&city=${city}`;
   if (category) url += `&classificationId=${category}`;
   if (startDateTime)
-    url += `&startDateTime=${format(startDateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
+    url += `&startDateTime=${format(new Date(startDateTime), "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
   if (endDateTime)
-    url += `&endDateTime=${format(endDateTime, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
+    url += `&endDateTime=${format(new Date(endDateTime), "yyyy-MM-dd'T'HH:mm:ss'Z'")}`;
   if (page) url += `&page=${page}`;
   if (!page) url += `&page=0`;
 
