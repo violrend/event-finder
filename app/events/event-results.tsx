@@ -6,13 +6,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { EventRow } from './event-row';
-import { RemovableFilterBadge } from './removable-filter-badge';
 import { format } from 'date-fns';
 import { EventType, PaginationType, SearchParamsType } from '@/lib/types';
-import { categories, fetchEventsAPI } from '@/api/api';
+import { fetchEventsAPI } from '@/api/api';
 import EventPagination from './event-pagination';
 import { Separator } from '@/components/ui/separator';
-import { Suspense } from 'react';
 
 async function fetchEvents({
   searchParams,
@@ -35,77 +33,16 @@ export async function EventResults({
 }) {
   const { events, pagination } = await fetchEvents({ searchParams });
 
-  const formatDateRange = (start: string, end: string) => {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-    if (
-      startDate.getMonth() === endDate.getMonth() &&
-      startDate.getFullYear() === endDate.getFullYear()
-    ) {
-      return `${format(startDate, 'MMM d')} to ${format(endDate, 'd, yyyy')}`;
-    } else if (startDate.getFullYear() === endDate.getFullYear()) {
-      return `${format(startDate, 'MMM d')} to ${format(
-        endDate,
-        'MMM d, yyyy'
-      )}`;
-    } else {
-      return `${format(startDate, 'MMM d, yyyy')} to ${format(
-        endDate,
-        'MMM d, yyyy'
-      )}`;
-    }
-  };
-
-  const getFilterBadges = async (params: SearchParamsType) => {
-    const badges = [];
-    const { city, category, startDateTime, endDateTime } = await params;
-    const cat = categories.find((cat) => cat.value === category)?.label || '';
-
-    if (city) {
-      badges.push({ key: 'city', value: city as string });
-    }
-    if (cat) {
-      badges.push({ key: 'category', value: cat as string });
-    }
-    if (startDateTime && endDateTime) {
-      badges.push({
-        key: 'daterange',
-        value: formatDateRange(startDateTime as string, endDateTime as string),
-      });
-    }
-    return badges;
-  };
+ 
 
   if (!events || events.length === 0) {
     return (
-      <div>
-        <div className='flex flex-wrap gap-2'>
-          {(await getFilterBadges(searchParams)).map((badge) => (
-            <RemovableFilterBadge
-              key={badge.key}
-              filterKey={badge.key}
-              filterValue={badge.value}
-            />
-          ))}
-        </div>
         <div className='h-40 pt-10 w-full text-center'>No events found</div>
-      </div>
     );
   }
 
   return (
     <>
-      <div className='flex flex-wrap gap-2'>
-        <Suspense fallback={<div>Loading...</div>}>
-          {(await getFilterBadges(searchParams)).map((badge) => (
-            <RemovableFilterBadge
-              key={badge.key}
-              filterKey={badge.key}
-              filterValue={badge.value}
-            />
-          ))}
-        </Suspense>
-      </div>
       <Table>
         <TableHeader>
           <TableRow>

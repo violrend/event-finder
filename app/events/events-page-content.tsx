@@ -2,24 +2,25 @@
 
 import { Suspense } from 'react';
 import { FilterDropdown } from './filter-dropdown';
-import { EventResults } from './event-results';
-import { SearchParamsType } from '@/lib/types';
+import { RemovableFilterBadge } from './removable-filter-badge';
 
 export function EventsPageContent({
-  searchParams,
+  categories,
+  cities,
 }: {
-  searchParams: SearchParamsType;
+  categories: { value: string; label: string }[];
+  cities: { value: string; label: string }[];
 }) {
   return (
     <>
       <section className='container px-2 md:px-4 mt-4'>
         <Suspense fallback={<div>Loading filters...</div>}>
-          <FilterDropdown />
+          <FilterDropdown categories={categories} cities={cities} />
         </Suspense>
       </section>
       <section className='container px-2 md:px-4'>
         <Suspense fallback={<div>Loading events...</div>}>
-          <EventResults searchParams={searchParams} />
+          <RemovableFilterBadge categories={categories} />
         </Suspense>
       </section>
     </>

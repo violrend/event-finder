@@ -18,9 +18,9 @@ export function EventRow({ event }: { event: EventSummaryType }) {
         <Image
           src={event.image}
           alt={event.name}
-          width={80}
-          height={80}
-          className='rounded-md'
+          width={100}
+          height={100}
+          className='rounded-sm'
         />
       </TableCell>
       <TableCell>

@@ -15,13 +15,18 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Filter } from 'lucide-react';
-import { getCities, categories } from '@/api/api';
 import { DatePickerWithPresets } from '@/components/date-picker-with-presets';
 import { useEffect, useState } from 'react';
 import { FilterType } from '@/lib/types';
 import { DateRange } from 'react-day-picker';
 
-export function FilterDropdown() {
+export function FilterDropdown({
+  categories,
+  cities,
+}: {
+  categories: { value: string; label: string }[];
+  cities: { value: string; label: string }[];
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
@@ -84,9 +89,6 @@ export function FilterDropdown() {
     router.push('/events');
     setOpen(false);
   };
-
-  // Get cities data
-  const cities = getCities();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

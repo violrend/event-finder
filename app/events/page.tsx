@@ -1,8 +1,9 @@
 import { SearchParamsType } from '@/lib/types';
 import Image from 'next/image';
-import { categories } from '@/api/api';
+import { categories, getCities } from '@/api/api';
 
 import { EventsPageContent } from './events-page-content';
+import { EventResults } from './event-results';
 
 export default async function EventsPage({
   searchParams,
@@ -10,7 +11,9 @@ export default async function EventsPage({
   searchParams: SearchParamsType;
 }) {
   const { city, category } = await searchParams;
-  const cat = categories.find((cat) => cat.value === category)?.label || '';
+  const catLabel = categories.find((cat) => cat.value === category)?.label || '';
+
+  const cities = getCities();
 
   return (
     <main className='flex flex-col'>
@@ -26,17 +29,20 @@ export default async function EventsPage({
         />
         <div className='absolute inset-0 bg-black/40' />
         <h1 className='absolute bottom-8 z-50 w-full text-3xl lg:text-4xl font-bold text-white text-center'>
-          {city && cat
-            ? `${cat} Events in ${city}`
+          {city && catLabel
+            ? `${catLabel} Events in ${city}`
             : city
             ? `Events in ${city}`
-            : cat
-            ? `Events in ${cat}`
+            : catLabel
+            ? `Events in ${catLabel}`
             : 'Events in Turkey'}
         </h1>
       </section>
       <div className='relative z-0 mt-32 md:mt-20'>
-      <EventsPageContent searchParams={searchParams} />
+        <EventsPageContent categories={categories} cities={cities} />
+        <section className='container px-2 md:px-4'>
+          <EventResults searchParams={searchParams} />
+        </section>
       </div>
     </main>
   );
