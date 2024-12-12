@@ -13,7 +13,7 @@ export default async function EventsPage({
   const cat = categories.find((cat) => cat.value === category)?.label || '';
 
   return (
-    <main className='flex flex-col min-h-screen'>
+    <main className='flex flex-col'>
       <section className='sticky -mt-14 top-0 left-0 right-0 h-[20vh] z-10'>
         <Image
           src='/hero-background.jpg'

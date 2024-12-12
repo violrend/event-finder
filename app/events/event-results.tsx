@@ -87,7 +87,7 @@ export async function EventResults({
             />
           ))}
         </div>
-        <div>No events found</div>
+        <div className='h-40 pt-10 w-full text-center'>No events found</div>
       </div>
     );
   }

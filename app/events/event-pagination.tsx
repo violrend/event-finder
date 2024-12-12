@@ -27,12 +27,14 @@ export const EventPagination = async ({
 
   const baseUrl = `/events?${newSearchParams.toString()}`;
 
+  const totalPage = totalPages < 50 ? totalPages : 50;
+
   const getPageNumbers = () => {
     const pages = [];
     
-    if (totalPages <= 5) {
+    if (totalPage <= 5) {
       // Show all pages if total is 7 or less
-      for (let i = 0; i < totalPages; i++) {
+      for (let i = 0; i < totalPage; i++) {
         pages.push(i);
       }
     } else {
@@ -45,16 +47,16 @@ export const EventPagination = async ({
       
       // Show current page and surrounding pages
       for (let i = Math.max(1, currentPage - 1); 
-           i <= Math.min(currentPage+1, totalPages - 2); i++) {
+           i <= Math.min(currentPage+1, totalPage - 2); i++) {
         pages.push(i);
       }
       
-      if (currentPage < totalPages - 3) {
+      if (currentPage < totalPage - 3) {
         pages.push(-1); // Ellipsis
       }
       
       // Always show last page
-      pages.push(totalPages - 1);
+      pages.push(totalPage - 1);
     }
     
     return pages;
@@ -88,7 +90,7 @@ export const EventPagination = async ({
         ))}
 
         {/* Next page */}
-        {currentPage < totalPages - 1 && (
+        {currentPage < totalPage - 1 && (
           <PaginationItem>
             <PaginationNext href={`${baseUrl}&page=${currentPage + 1}`} />
           </PaginationItem>
