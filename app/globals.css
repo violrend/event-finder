@@ -71,7 +71,7 @@ body {
     @apply bg-background text-foreground;
   }
   p {
-    @apply font-noto_serif;
+    @apply font-inter;
   }
   h1,
   h2,
@@ -81,15 +81,15 @@ body {
     @apply font-inter font-bold;
   }
   h1 {
-    @apply text-5xl md:text-5xl lg:text-6xl;
+    @apply font-inter text-5xl md:text-5xl lg:text-6xl;
   }
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply font-inter text-3xl md:text-4xl lg:text-5xl;
   }
   h3 {
-    @apply text-xl md:text-3xl lg:text-4xl;
+    @apply font-inter text-xl md:text-3xl lg:text-4xl;
   }
   h4 {
-    @apply text-lg md:text-2xl lg:text-3xl;
+    @apply font-inter text-lg md:text-2xl lg:text-3xl;
   }
 }

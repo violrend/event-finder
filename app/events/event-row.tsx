@@ -20,8 +20,9 @@ export function EventRow({ event }: { event: EventSummaryType }) {
       <TableCell>
         <div className="font-semibold">{event.name}</div>
         <div className="text-sm text-gray-500 md:hidden">{event.venue}</div>
-        <div className="text-sm text-gray-500 md:hidden">
-          {event.category} • {event.date}
+        <div className="text-sm text-gray-500 md:hidden flex justify-between">
+          <span>{event.category}</span>
+          <span>{event.date}</span>
         </div>
         {/* TODO: make this 3 rows with date pushed to right */}
       </TableCell>

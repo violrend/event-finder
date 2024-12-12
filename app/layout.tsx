@@ -20,7 +20,7 @@ export default function RootLayout({
       className={`${inter.variable} ${noto_serif.variable}`}
       suppressHydrationWarning
     >
-      <body className={noto_serif.className}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
