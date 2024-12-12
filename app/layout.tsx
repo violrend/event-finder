@@ -20,7 +20,7 @@ export default function RootLayout({
       className={`${inter.variable} ${noto_serif.variable}`}
       suppressHydrationWarning
     >
-      <body className={inter.className}>
+      <body className={`min-h-screen flex flex-col ${inter.className}`}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
@@ -28,7 +28,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main>{children}</main>
+          <main className='flex-grow'>{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

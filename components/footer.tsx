@@ -30,7 +30,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='container mx-auto px-4 py-8'>
+    <footer className='container mx-auto mt-auto w-full px-4 py-8'>
       <Separator className='mb-5' />
 
       <div className='flex flex-col md:flex-row md:justify-between space-y-8 md:space-y-0 md:items-end'>
